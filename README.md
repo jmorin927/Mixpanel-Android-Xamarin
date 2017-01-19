@@ -1,5 +1,5 @@
 # Mixpanel-Android-Xamarin
-Mixpanel - Xamarin Android Example:
+Mixpanel Bindings for Xamarin Android
 
 - In order to get this to work you will need to set your Mixpanel API Key in:
 
