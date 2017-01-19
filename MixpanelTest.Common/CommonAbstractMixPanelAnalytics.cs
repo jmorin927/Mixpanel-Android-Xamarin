@@ -15,6 +15,31 @@ namespace MixpanelTest.Common
 {
 
 	/*--------------------------------------------------------------------------------*/
+	// Namespace Types
+	/*--------------------------------------------------------------------------------*/
+
+	public enum MixPanelType
+	{
+		People = 0,
+		Event,
+		Identify,
+	};
+
+	/*--------------------------------------------------------------------------------*/
+
+	public enum MixPanelAction
+	{
+		None = 0,
+
+		Set,
+		SetOnce,
+		SetSuperOnce,
+		Increment,
+		Decrement,
+		Append,
+	};
+
+	/*--------------------------------------------------------------------------------*/
 	// Abstract Class: SClientCommonAbstractMixPanelAnalytics
 	/*--------------------------------------------------------------------------------*/
 
@@ -22,75 +47,15 @@ namespace MixpanelTest.Common
     {
 
 		/*--------------------------------------------------------------------------------*/
-		// Namespace Constants
+		// Constants
 		/*--------------------------------------------------------------------------------*/
 
-		public static readonly string MixPanel_API_Key = "this_needs_to_be_set_by_you";
+		public static readonly string MixPanel_API_Key = "this_needs_to_be_set_by_you_to_make_things_work";
+
+		/*--------------------------------------------------------------------------------*/
 
 		public static readonly string MixPanel_Identify = "MixpanelTest";
 		public static readonly string MixPanel_DistinctId = "MixPanel" + MixPanel_Identify;
-
-		/*--------------------------------------------------------------------------------*/
-		// Types
-		/*--------------------------------------------------------------------------------*/
-
-		public enum MixPanelType
-		{
-			People = 0,
-			Event,
-			Identify,
-		};
-
-		/*--------------------------------------------------------------------------------*/
-
-		public enum MixPanelAction
-		{
-			None = 0,
-
-			Set,
-			SetOnce,
-			SetSuperOnce,
-			Increment,
-			Decrement,
-			Append,
-		};
-
-		/*--------------------------------------------------------------------------------*/
-		// Class: MixPanelCacheData
-		/*--------------------------------------------------------------------------------*/
-
-		public class MixPanelCacheData : Dictionary<string, object>
-		{
-
-			/*--------------------------------------------------------------------------------*/
-			// Properties
-			/*--------------------------------------------------------------------------------*/
-
-			public MixPanelType type { get; set; }
-			public MixPanelAction action { get; set; }
-			public string key { get; set; }
-			public Dictionary<string, object> properties { get; set; }
-
-			/*--------------------------------------------------------------------------------*/
-			// Constructors
-			/*--------------------------------------------------------------------------------*/
-
-			public MixPanelCacheData (
-				MixPanelType a_type,
-				string a_key,
-				Dictionary<string, object> a_properties = null,
-				MixPanelAction a_action = MixPanelAction.None
-			)
-			{
-				this.type = a_type;
-				this.key = a_key;
-				this.properties = a_properties;
-				this.action = a_action;
-			}
-
-			/*--------------------------------------------------------------------------------*/
-
-		}
 
 		/*--------------------------------------------------------------------------------*/
 		// Properties
@@ -104,7 +69,7 @@ namespace MixpanelTest.Common
 		protected bool processingCache  { get; set; }
 
 		protected Task mixPanelDelayedTask { get; set; } = null;
-		protected List<MixPanelCacheData> cachedEvents { get; private set; } = new List<MixPanelCacheData> ();
+		protected List<CommonMixPanelCacheData> cachedEvents { get; private set; } = new List<CommonMixPanelCacheData> ();
 
 		/*--------------------------------------------------------------------------------*/
 		// Abstract Methods
@@ -140,35 +105,7 @@ namespace MixpanelTest.Common
 		);
 
 		/*--------------------------------------------------------------------------------*/
-		// Virtual Methods
-		/*--------------------------------------------------------------------------------*/
-
-		public virtual void Send (
-			string a_key, 
-			string a_value
-		)
-		{
-		}
-
-		/*--------------------------------------------------------------------------------*/
-
-		public virtual void Send (
-			string a_key, 
-			Dictionary<string, object> a_value
-		)
-		{
-		}
-
-		/*--------------------------------------------------------------------------------*/
-
-		public virtual void Send (
-			string a_key, 
-			string a_type,
-			Dictionary<string, object> a_value
-		)
-		{
-		}
-
+		// Virtual Methods for ICommonAnalytics
 		/*--------------------------------------------------------------------------------*/
 
 		public virtual void Send (
@@ -178,6 +115,7 @@ namespace MixpanelTest.Common
 			Dictionary<string, object> a_value
 		)
 		{
+			throw new NotImplementedException ();
 		}
 
 		/*--------------------------------------------------------------------------------*/
@@ -187,6 +125,7 @@ namespace MixpanelTest.Common
 			string message
 		)
 		{
+			throw new NotImplementedException ();
 		}
 
 		/*--------------------------------------------------------------------------------*/
@@ -205,7 +144,7 @@ namespace MixpanelTest.Common
 					int removeIndex = -1;
 					if (this.cachedEvents.Count > 0)
 					{
-						foreach (MixPanelCacheData cacheData in this.cachedEvents)
+						foreach (CommonMixPanelCacheData cacheData in this.cachedEvents)
 						{
 							if (cacheData.type == MixPanelType.Identify)
 							{
@@ -224,7 +163,7 @@ namespace MixpanelTest.Common
 					// Always cache identify
 					this.cachedEvents.Insert (
 						identifyIndex,
-						new MixPanelCacheData (
+						new CommonMixPanelCacheData (
 							MixPanelType.Identify,
 							null
 						)

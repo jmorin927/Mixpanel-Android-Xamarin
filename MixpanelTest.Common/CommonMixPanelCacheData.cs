@@ -2,6 +2,7 @@
 // Using
 /*--------------------------------------------------------------------------------*/
 
+using System;
 using System.Collections.Generic;
 
 /*--------------------------------------------------------------------------------*/
@@ -12,29 +13,37 @@ namespace MixpanelTest.Common
 {
 
 	/*--------------------------------------------------------------------------------*/
-	// Interface: ICommonAnalytics
+	// Class: CommonMixPanelCacheData
 	/*--------------------------------------------------------------------------------*/
 
-	public interface ICommonAnalytics
+	public class CommonMixPanelCacheData : Dictionary<string, object>
 	{
 
 		/*--------------------------------------------------------------------------------*/
-		// Methods
+		// Properties
 		/*--------------------------------------------------------------------------------*/
 
-		void Send (
-			string a_key, 
-			string a_type,
-			string a_action = null,
-			Dictionary<string,object> a_value = null
-		);
+		public MixPanelType type { get; set; }
+		public MixPanelAction action { get; set; }
+		public string key { get; set; }
+		public Dictionary<string, object> properties { get; set; }
 
 		/*--------------------------------------------------------------------------------*/
+		// Constructors
+		/*--------------------------------------------------------------------------------*/
 
-		void TrackException (
-			string a_key, 
-			string a_message
-		);
+		public CommonMixPanelCacheData (
+			MixPanelType a_type,
+			string a_key,
+			Dictionary<string, object> a_properties = null,
+			MixPanelAction a_action = MixPanelAction.None
+		)
+		{
+			this.type = a_type;
+			this.key = a_key;
+			this.properties = a_properties;
+			this.action = a_action;
+		}
 
 		/*--------------------------------------------------------------------------------*/
 

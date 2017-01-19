@@ -63,52 +63,7 @@ namespace MixpanelTest.Common.Droid
 		}
 
 		/*--------------------------------------------------------------------------------*/
-		// ICommonAnalytics Overrides
-		/*--------------------------------------------------------------------------------*/
-
-		public override void Send (
-			string a_key, 
-			string a_type = null,
-			string a_action = null,
-			Dictionary<string, object> a_value = null
-		)
-		{
-			try
-			{
-				// People Event
-				if (String.Compare(a_type, MixPanelType.People.ToString(), false) == 0)
-				{
-					MixPanelAction action = MixPanelAction.None;
-					if (!String.IsNullOrEmpty(a_action))
-					{
-						action = (MixPanelAction)Enum.Parse(typeof(MixPanelAction), a_action); 
-					}
-
-					// Track it
-					this.TrackPeopleEvent (
-						a_key,
-						action,
-						a_value
-					);
-				}
-				// Event
-				else if (String.Compare(a_type, MixPanelType.Event.ToString(), false) == 0)
-				{
-					// Track it
-					this.TrackEvent (
-						a_key,
-						a_value
-					);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(">> Exception: {0}", ex.Message);
-			}
-		}
-
-		/*--------------------------------------------------------------------------------*/
-		// CommonAbstractMixPanelAnalytics Overrides
+		// CommonAbstractMixPanelAnalytics Abstract Overrides
 		/*--------------------------------------------------------------------------------*/
 
 		public override bool Initialize (
@@ -158,7 +113,7 @@ namespace MixpanelTest.Common.Droid
 				{
 					// Cache event
 					this.cachedEvents.Add (
-						new MixPanelCacheData (
+						new CommonMixPanelCacheData (
 							MixPanelType.Event,
 							a_event,
 							a_properties
@@ -218,7 +173,7 @@ namespace MixpanelTest.Common.Droid
 				{
 					// Cache event
 					this.cachedEvents.Add (
-						new MixPanelCacheData (
+						new CommonMixPanelCacheData (
 							MixPanelType.People,
 							a_event,
 							a_properties,
@@ -248,7 +203,7 @@ namespace MixpanelTest.Common.Droid
 						{
 							this.processingCache = true;
 
-							foreach (MixPanelCacheData cacheData in this.cachedEvents)
+							foreach (CommonMixPanelCacheData cacheData in this.cachedEvents)
 							{
 								Dictionary<string, object> mutableProperties = InjectCommonProperties (cacheData.properties);
 
@@ -331,6 +286,51 @@ namespace MixpanelTest.Common.Droid
 			}
 
 			return a_properties;		
+		}
+
+		/*--------------------------------------------------------------------------------*/
+		// ICommonAnalytics Overrides
+		/*--------------------------------------------------------------------------------*/
+
+		public override void Send (
+			string a_key, 
+			string a_type = null,
+			string a_action = null,
+			Dictionary<string, object> a_value = null
+		)
+		{
+			try
+			{
+				// People Event
+				if (String.Compare(a_type, MixPanelType.People.ToString(), false) == 0)
+				{
+					MixPanelAction action = MixPanelAction.None;
+					if (!String.IsNullOrEmpty(a_action))
+					{
+						action = (MixPanelAction)Enum.Parse(typeof(MixPanelAction), a_action); 
+					}
+
+					// Track it
+					this.TrackPeopleEvent (
+						a_key,
+						action,
+						a_value
+					);
+				}
+				// Event
+				else if (String.Compare(a_type, MixPanelType.Event.ToString(), false) == 0)
+				{
+					// Track it
+					this.TrackEvent (
+						a_key,
+						a_value
+					);
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(">> Exception: {0}", ex.Message);
+			}
 		}
 
 		/*--------------------------------------------------------------------------------*/

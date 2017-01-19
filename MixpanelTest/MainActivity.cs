@@ -54,8 +54,8 @@ namespace MixpanelTest
 
 				this._mixpanelAnalytics.Send(
 					"Button Pressed", 
-					CommonAbstractMixPanelAnalytics.MixPanelType.Event.ToString(),
-					CommonAbstractMixPanelAnalytics.MixPanelAction.Increment.ToString()
+					MixPanelType.Event.ToString(),
+					MixPanelAction.Increment.ToString()
 				);
 			};
 
@@ -71,12 +71,10 @@ namespace MixpanelTest
 		{
 			try
 			{
-				//var bundle = PackageManager.GetApplicationInfo(PackageName, Android.Content.PM.PackageInfoFlags.MetaData).MetaData;
-				//string mixpanelApiKey = bundle.GetString("MixPanel_API_Key");
-
 				// Instantiate mixpanel analytics
 				this._mixpanelAnalytics = new CommonDroidMixPanelAnalytics(this);
 				this._mixpanelAnalytics.Initialize(CommonAbstractMixPanelAnalytics.MixPanel_API_Key);
+
 				// Force caching
 				this._mixpanelAnalytics.ForceCaching ();
 
@@ -84,11 +82,13 @@ namespace MixpanelTest
 				Dictionary<string, object> userProperties = new Dictionary<string, object> {
 					{ "$email", "email@someplace.com" },
 					{ "$phone", "14081234567" },
-					{ "$name", "Bob Smith" }
+					{ "$name", "Jonathan Morin" }
 				};
+
+				// Set people user properties
 				this._mixpanelAnalytics.TrackPeopleEvent (
 					null,
-					CommonAbstractMixPanelAnalytics.MixPanelAction.Set,
+					MixPanelAction.Set,
 					userProperties
 				);
 
