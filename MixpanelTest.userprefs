@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{0585B6DF-B20D-4FBF-844C-DBC3DE6638E1}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MixpanelTest/MainActivity.cs">
+    <Files>
+      <File FileName="MixpanelTest/MainActivity.cs" Line="58" Column="5" />
+      <File FileName="MixpanelTest.Common/CommonAbstractMixPanelAnalytics.cs" Line="21" Column="74" />
+      <File FileName="MixpanelTest.Common/ICommonAnalytics.cs" Line="22" Column="13" />
+      <File FileName="MixpanelTest.Common.Droid/CommonDroidMixPanelAnalytics.cs" Line="306" Column="24" />
+      <File FileName="MixpanelTest/Properties/AndroidManifest.xml" Line="11" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/jonathan/Desktop/MixpanelTest/MixpanelTest/MainActivity.cs" line="55" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MixpanelTest PreferredExecutionTarget="Android.Nexus 5 - Lollipop" />
+</Properties>

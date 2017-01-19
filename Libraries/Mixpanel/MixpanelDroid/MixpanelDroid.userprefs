@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{8874D69B-95C0-410D-ACC4-DE6255F53EB1}|Default">
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="MixpanelDroid" expanded="True">
+            <Node name="MixpanelDroid" expanded="True">
+              <Node name="Jars" expanded="True" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.MixpanelDroid PreferredExecutionTarget="Android.Nexus 5 - Lollipop" />
+</Properties>
